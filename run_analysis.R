@@ -15,8 +15,8 @@ activityTest  <- read.table(file.path(path_x, "test" , "Y_test.txt" ),header = F
 activityTrain <- read.table(file.path(path_x, "train", "Y_train.txt"),header = FALSE)
 
 #Read subject test and train data
-subjectTrain <- read.table(file.path(path_x, "train", "subject_train.txt"),header = FALSE)
 subjectTest  <- read.table(file.path(path_x, "test" , "subject_test.txt"),header = FALSE)
+subjectTrain <- read.table(file.path(path_x, "train", "subject_train.txt"),header = FALSE)
 
 #Read features test and train data
 featuresTest  <- read.table(file.path(path_x, "test" , "X_test.txt" ),header = FALSE)

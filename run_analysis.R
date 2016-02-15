@@ -11,36 +11,36 @@ if(!file.exists("./CourseProject/Dataset.zip")) {
 path_x <- file.path("./CourseProject" , "UCI HAR Dataset")
 
 #Read activity test and train data
-dataActivityTest  <- read.table(file.path(path_x, "test" , "Y_test.txt" ),header = FALSE)
-dataActivityTrain <- read.table(file.path(path_x, "train", "Y_train.txt"),header = FALSE)
+activityTest  <- read.table(file.path(path_x, "test" , "Y_test.txt" ),header = FALSE)
+activityTrain <- read.table(file.path(path_x, "train", "Y_train.txt"),header = FALSE)
 
 #Read subject test and train data
-dataSubjectTrain <- read.table(file.path(path_x, "train", "subject_train.txt"),header = FALSE)
-dataSubjectTest  <- read.table(file.path(path_x, "test" , "subject_test.txt"),header = FALSE)
+subjectTrain <- read.table(file.path(path_x, "train", "subject_train.txt"),header = FALSE)
+subjectTest  <- read.table(file.path(path_x, "test" , "subject_test.txt"),header = FALSE)
 
 #Read features test and train data
-dataFeaturesTest  <- read.table(file.path(path_x, "test" , "X_test.txt" ),header = FALSE)
-dataFeaturesTrain <- read.table(file.path(path_x, "train", "X_train.txt"),header = FALSE)
+featuresTest  <- read.table(file.path(path_x, "test" , "X_test.txt" ),header = FALSE)
+featuresTrain <- read.table(file.path(path_x, "train", "X_train.txt"),header = FALSE)
 
 #Combine train and test data for subject, activity and features respectively
-dataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
-dataActivity<- rbind(dataActivityTrain, dataActivityTest)
-dataFeatures<- rbind(dataFeaturesTrain, dataFeaturesTest)
+subjectCombined <- rbind(subjectTrain, subjectTest)
+activityCombined<- rbind(activityTrain, activityTest)
+featuresCombined<- rbind(featuresTrain, featuresTest)
 
 #Assigning column names for dataSubject and dataActivity
-names(dataSubject)<-c("subject")
-names(dataActivity)<- c("activity")
+names(subjectCombined)<-c("subject")
+names(activityCombined)<- c("activity")
 
 #Reading column names for dataFeatures from features.txt and assigning them to dataFeatures
-dataFeaturesNames <- read.table(file.path(path_x, "features.txt"),head=FALSE)
-names(dataFeatures)<- dataFeaturesNames$V2
+featuresNames <- read.table(file.path(path_x, "features.txt"),head=FALSE)
+names(featuresCombined)<- featuresNames$V2
 
 #Combinig all our data into one dataset, "Data"
-dataCombine <- cbind(dataSubject, dataActivity)
-Data <- cbind(dataFeatures, dataCombine)
+dataCombined <- cbind(subjectCombined, activityCombined)
+Data <- cbind(featuresCombined, dataCombined)
 
 #Extracting measurements on mean and standard deviation for each measurement, and assigning it back to "Data"
-subdataFeaturesNames<-dataFeaturesNames$V2[grep("mean\\(\\)|std\\(\\)", dataFeaturesNames$V2)]
+subdataFeaturesNames<-featuresNames$V2[grep("mean\\(\\)|std\\(\\)", featuresNames$V2)]
 selectedNames<-c(as.character(subdataFeaturesNames), "subject", "activity" )
 Data<- Data[, selectedNames]
 

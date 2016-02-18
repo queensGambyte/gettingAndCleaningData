@@ -45,7 +45,7 @@ selectedNames<-c(as.character(subdataFeaturesNames), "subject", "activity" )
 Data<- Data[, selectedNames]
 
 #Reading activity labels from "activity_labels.txt"
-activityLabels <- read.table(file.path(path_rf, "activity_labels.txt"),header = FALSE)
+activityLabels <- read.table(file.path(path_x, "activity_labels.txt"),header = FALSE)
 
 #Converting the column "activity" of "Data" into character Vector, and then converting it into factor with labels from "activity_labels.txt"
 Data$activity<- as.character(Data$activity)
